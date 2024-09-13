@@ -7,7 +7,7 @@ countdown_task = None
 channel_id = None
 _game_in_progress = False
 
-# 미니게임 진행 여부 체크
+# 미니게임 진행중인지 여부 체크하기
 def game_in_progress():
     return _game_in_progress
 
@@ -27,7 +27,7 @@ async def start_game(interaction: discord.Interaction):
 
     countdown_task = asyncio.create_task(countdown(interaction))
 
-# 카운트다운 및 게임 종료 로직
+# 카운트다운 및 게임 종료
 async def countdown(interaction: discord.Interaction):
     global _game_in_progress, shooting_count, channel_id
 
@@ -42,12 +42,12 @@ async def countdown(interaction: discord.Interaction):
         )
         await channel.send(embed=embed)
 
-    # 상태 초기화
+    # 초기화
     shooting_count = 0
     channel_id = None
     _game_in_progress = False
 
-# 사격 명령어 처리 함수
+# 사격 명령어 함수
 async def shoot_game(interaction: discord.Interaction):
     global shooting_count, countdown_task, _game_in_progress
 
@@ -68,7 +68,7 @@ async def shoot_game(interaction: discord.Interaction):
         )
         await channel.send(embed=embed)
 
-        # 상태 초기화
+        # 초기화
         shooting_count = 0
         channel_id = None
         _game_in_progress = False
